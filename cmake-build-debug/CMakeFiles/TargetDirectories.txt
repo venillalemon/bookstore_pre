@@ -1,0 +1,3 @@
+/home/limike/Git/lib/bookstore_pre/cmake-build-debug/CMakeFiles/bookstore_pre.dir
+/home/limike/Git/lib/bookstore_pre/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/limike/Git/lib/bookstore_pre/cmake-build-debug/CMakeFiles/rebuild_cache.dir
