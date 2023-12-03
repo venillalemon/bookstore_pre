@@ -283,22 +283,22 @@ public:
     if (lengthofT == 2) {
       insert_node(_key, _val, next_node.next);
       read(next_node, lengthofT);
-      next_node.data[0] = KV(_key, _val);
+      next_node.data[0] = in_pair;
       update(next_node, lengthofT);
     } else if (tmp == 1) {
       tmp = next_node.next;
       read(next_node, tmp);
-      next_node.insert(KV(_key, _val));
-      next_node.first = KV(_key, _val);
+      next_node.insert(in_pair);
+      next_node.first = in_pair;
       update(next_node, next_node.pos);
     } else {
-      next_node.insert(KV(_key, _val));
+      next_node.insert(in_pair);
       update(next_node, tmp);
     }
 
     //print();
     //std::cout<<next_node.size*next_node.size<<" "<<1.8*cursize<<'\n';
-    if (next_node.size >= 900) {
+    if (next_node.size >= sqn - 20) {
       divide_node(tmp);
     }
   }
@@ -368,7 +368,7 @@ public:
       //std::cout<<last<<":"<<_key<<"||"<<last_node.first.key<<"||"<<last_node.pos<<"||"<<last_node.next<<'\n';
       if (in_pair < last_node.first) break;// if key<last_node.key then break
       cursize -= last_node.size;
-      last_node.remove(KV(_key, _val));
+      last_node.remove(in_pair);
       update(last_node, last);
       cursize += last_node.size;
       write_info(cursize, 2);
