@@ -4,6 +4,7 @@
 #include <iostream>
 #include <cstring>
 #include <fstream>
+#include <algorithm>
 
 using std::string;
 using std::fstream;
@@ -79,9 +80,15 @@ public:
 
   void insert(KV kv) {
     int i;
-    for (i = 0; i < size; i++) {
-      if (!(data[i] < kv)) break;
+    int left=0,right=size;
+    int mid;
+    while(left+1<right){
+      mid=(left+right)>>1;
+      if(data[mid]<kv) left=mid;
+      else right=mid;
     }
+    i=left+1;
+    if(kv<data[0]) i=0;
     for (int j = size; j > i; j--) {
       data[j] = data[j - 1];
     }
@@ -91,34 +98,36 @@ public:
 
   void remove(KV kv) {
     int i;
-    int left = -1, right = -1;
-    int status = 0;
-    for (i = 0; i < size; i++) {
-      if (status == 0 && data[i] == kv) {
-        left = i;
-        status = 1;
-      }
-      if (status == 1 && !(data[i] == kv)) {
-        right = i;
-        status = 2;
-      }
+    int left=0,right=size;
+    int mid;
+    while(left+1<right){
+      mid=(left+right)>>1;
+      if(data[mid]<kv) left=mid;
+      else right=mid;
     }
-    if (status == 1) {
-      size = left;
-    } else if (status == 2) {
-      int cnt = 0;
-      while (right + cnt < size) {
-        data[left + cnt] = data[right + cnt];
-        cnt++;
-      }
-      size = left + cnt;
+    i=left+1;
+    if(data[0]==kv) i=0;
+    if(!(data[i]==kv)) return;
+    for(;i<size-1;i++) {
+      data[i]=data[i+1];
     }
+    size--;
     if (size > 0) first = data[0];
     else first = KV();
   }
 
   void get(char _key[], bool &exist) const {
-    for (int i = 0; i < size; i++) {
+    int i;
+    int left=0,right=size;
+    int mid;
+    while(left+1<right){
+      mid=(left+right)>>1;
+      if(strcmp(data[mid].key,_key)<0) left=mid;
+      else right=mid;
+    }
+    i=left+1;
+    if(strcmp(data[0].key,_key)==0) i=0;
+    for (; i < size; i++) {
       if (strcmp(data[i].key, _key) == 0) {
         exist = true;
         std::cout << data[i].value << ' ';
@@ -289,7 +298,7 @@ public:
 
     //print();
     //std::cout<<next_node.size*next_node.size<<" "<<1.8*cursize<<'\n';
-    if (next_node.size * next_node.size >= 1.8 * cursize) {
+    if (next_node.size >= 900) {
       divide_node(tmp);
     }
   }
