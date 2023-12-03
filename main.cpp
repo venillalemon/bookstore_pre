@@ -6,33 +6,31 @@ using std::cout;
 using std::endl;
 
 int main() {
-  //ofstream out("aux",ios::out);
-  //ifstream in;
   NodeMemory mr;
-  mr.initialise("aux","maindata");
-  ifstream in("aux",ifstream::in);
-  if (!in.is_open()||!in.is_open()) {
-    std::cout << "dddddd\n";
-  }
-  /*int i;
-  Node n;
-  in.read(reinterpret_cast<char *>(&i),sizeof(int));
-  //cout<<i<<endl;
-  in.read(reinterpret_cast<char *>(&i),sizeof(int));
-  //cout<<i<<endl;
-  in.read(reinterpret_cast<char *>(&n),sizeof(Node));
-  cout<<n.key<<" "<<n.size<<" "<<n.pos<<" "<<n.pre<<" "<<n.next<<endl;
-  in.read(reinterpret_cast<char *>(&n),sizeof(Node));
-  cout<<n.key<<" "<<n.size<<" "<<n.pos<<" "<<n.pre<<" "<<n.next<<endl;*/
-  char s[70]= {'b','s'};
-  in.close();
+  mr.initialise("aux");
+  char s[70];
+  int n;
+  std::string op;
+  int val;
   //std::cout<<s<<'\n';
-  mr.insert(s,2543);
-
-  mr.print();
+  while (n--) {
+    std::cin >> op;
+    if (op == "print") {
+      mr.print();
+      continue;
+    }
+    else if (op == "quit") break;
+    std::cin >> s;
+    if (op == "insert") {
+      std::cin >> val;
+      mr.insert_pair(s, val);
+    } else if (op == "delete") {
+      std::cin >> val;
+      mr.remove_pair(s, val);
+    } else if (op == "find") {
+      mr.get_key(s);
+    }
+    //mr.print();
+  }
   return 0;
-  /*ofstream out("aux",ios::out);
-  ofstream ou("main",ios::out);
-  out.close();
-  ou.close();*/
 }
