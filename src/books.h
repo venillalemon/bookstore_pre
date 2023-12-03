@@ -10,10 +10,12 @@ using std::fstream;
 using std::ifstream;
 using std::ofstream;
 
-const int sqn=1000;
+const int sqn = 1000;
 
 class Node;
+
 class KV;
+
 class NodeMemory;
 
 class KV {

@@ -8,6 +8,7 @@ int main() {
   mr.initialise("aux");
   char s[70];
   int n;
+  cin >> n;
   std::string op;
   int val;
   while (n--) {
@@ -15,8 +16,7 @@ int main() {
     if (op == "print") {
       mr.print();
       continue;
-    }
-    else if (op == "quit") break;
+    } else if (op == "quit") break;
     cin >> s;
     if (op == "insert") {
       cin >> val;
