@@ -17,8 +17,6 @@ int main() {
       mr.print();
       continue;
     } else if (op == "quit") {
-      mr.update_list();
-      mr.update_aux();
       break;
     } else {
       cin >> s;
@@ -41,5 +39,7 @@ int main() {
     }
     //mr.print();
   }
+  mr.update_list();
+  mr.update_aux();
   return 0;
 }
