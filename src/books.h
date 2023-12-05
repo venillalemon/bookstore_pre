@@ -7,6 +7,7 @@
 #include <climits>
 #include <map>
 
+using std::cout;
 using std::string;
 using std::fstream;
 using std::ifstream;
@@ -16,12 +17,6 @@ using std::map;
 
 const int sqn = 250;
 const int info_num = 250;
-
-class Node;
-
-class KV;
-
-class NodeMemory;
 
 class KV {
 
@@ -48,6 +43,7 @@ public:
 
 };
 
+
 class Node {
 
 public:
@@ -61,21 +57,21 @@ public:
 
   Node(char _key[70], int _val, int _pos) {
     first = KV(_key, _val);
-    //std::cout<<key<<'\n';
+    //cout<<key<<'\n';
     pos = _pos;
     size = 0;
     data[0] = first;
   }
 
   void print() {
-    std::cout << first.key << " " << first.value << " " << size << " " << pos << ":\n";
+    cout << first.key << " " << first.value << " " << size << " " << pos << ":\n";
     KV val;
     if (pos < 3) {
-      std::cout << "   null\n";
+      cout << "   null\n";
     }
     for (int i = 0; i < size; ++i) {
       val = data[i];
-      std::cout << "   " << val.key << "   " << val.value << '\n';
+      cout << "   " << val.key << "   " << val.value << '\n';
     }
   }
 
@@ -108,13 +104,12 @@ public:
     for (int i = 0; i < size; i++) {
       if (strcmp(data[i].key, _key) == 0) {
         exist = true;
-        std::cout << data[i].value << ' ';
+        cout << data[i].value << ' ';
       }
     }
   }
 
 };// stored in the auxiliary file
-
 
 
 class NodeMemory {
@@ -143,7 +138,7 @@ public:
     file_main.open(main_name, std::ios::in);
     file_aux.open(main_name + "_aux", std::ios::in);
     if (!file_main.is_open()) {
-      //std::cout << "create new\n";
+      //cout << "create new\n";
       file_main.close();
       file_aux.close();
       char st[70] = "", ed[70] = "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz";
@@ -265,11 +260,11 @@ public:
   }
 
   void print() {
-    std::cout << "[lengthofnodes=" << lengthofnodes << ", lengthoflist=" << lengthoflist << "]\n";
+    cout << "[lengthofnodes=" << lengthofnodes << ", lengthoflist=" << lengthoflist << "]\n";
     Node n;
     file_main.open(main_name, std::ifstream::in);
     for (auto i: list) {
-      std::cout << i.first.key << " " << i.first.value << " " << i.second << '\n';
+      cout << i.first.key << " " << i.first.value << " " << i.second << '\n';
     }
     for (auto i: list) {
       file_main.seekg(info_num * sizeof(pair<KV, int>) + (i.second - 1) * sizeof(Node));
@@ -358,7 +353,6 @@ public:
     }
   }
 
-
   void get_key(char _key[]) {
     KV lowest(_key, INT_MIN), highest(_key, INT_MAX);
     auto beg = list.lower_bound(lowest);
@@ -370,11 +364,10 @@ public:
       read(node, (*it).second);
       node.get(_key, exist);
     }
-    if (!exist) std::cout << "null";
-    std::cout << '\n';
+    if (!exist) cout << "null";
+    cout << '\n';
   }
 
 };
-
 
 #endif //BOOKSTORE_PRE_BOOKS_H

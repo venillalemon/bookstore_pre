@@ -4,8 +4,8 @@
 using std::cin;
 
 int main() {
-  NodeMemory mr;
-  mr.initialise("ma");
+  NodeMemory nm;
+  nm.initialise("ma");
   char s[70];
   int n;
   cin >> n;
@@ -14,7 +14,7 @@ int main() {
   while (n--) {
     cin >> op;
     if (op == "print") {
-      mr.print();
+      nm.print();
       continue;
     } else if (op == "quit") {
       break;
@@ -22,24 +22,23 @@ int main() {
       cin >> s;
       if (op == "insert") {
         cin >> val;
-        mr.insert_pair(s, val);
+        nm.insert_pair(s, val);
       } else if (op == "delete") {
         cin >> val;
-        mr.remove_pair(s, val);
+        nm.remove_pair(s, val);
       } else if (op == "find") {
-        mr.get_key(s);
+        nm.get_key(s);
       } else if (op == "get") {
         cin >> val;
         Node node;
-        mr.read(node, val);
+        nm.read(node, val);
         node.print();
       } else {
         continue;
       }
     }
-    //mr.print();
   }
-  mr.update_list();
-  mr.update_aux();
+  nm.update_list();
+  nm.update_aux();
   return 0;
 }
