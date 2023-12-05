@@ -14,8 +14,8 @@ using std::ofstream;
 using std::pair;
 using std::map;
 
-const int sqn = 24;
-const int info_num=10;
+const int sqn = 1000;
+const int info_num=250;
 
 class Node;
 
@@ -195,7 +195,6 @@ public:
   }
 
   void init_list() {
-    std::cout<<"upd\n";
     file_main.open(main_name, fstream::out | fstream::binary);
     int cnt=0;
     for(auto i :list) {
@@ -211,7 +210,6 @@ public:
   }
 
   void update_list() {
-    std::cout<<"upd\n";
     file_main.open(main_name, fstream::out | fstream::in);
     int cnt=0;
     for(auto i :list) {
@@ -235,7 +233,6 @@ public:
   };
 
   void read_list() {
-    std::cout<<"read\n";
     list.clear();
     file_main.open(main_name, ifstream::in);
     pair<KV,int> tmp;
@@ -266,10 +263,8 @@ public:
 
   //append t to the end
   void write(Node &t) {
-    std::cout<<"write\n";
     file_main.open(main_name, std::ofstream::app);
     file_main.write(reinterpret_cast<char *>(&t), sizeof(Node));
-    if(file_main.is_open()) std::cout<<"r\n";
     file_main.close();
     ++lengthofnodes;
     ++lengthoflist;
@@ -363,7 +358,6 @@ public:
 
   //insert the Node before the Node at pos
   void first_node(char _key[70], int _val) {
-    std::cout<<"first node\n"<<lengthofnodes+1;
     KV in_pair(_key,_val);
     Node new_node(_key, _val, lengthofnodes + 1);
     new_node.size = 1;
