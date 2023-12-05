@@ -5,7 +5,7 @@ using std::cin;
 
 int main() {
   NodeMemory mr;
-  mr.initialise("aux");
+  mr.initialise("ma");
   char s[70];
   int n;
   cin >> n;
@@ -16,7 +16,11 @@ int main() {
     if (op == "print") {
       mr.print();
       continue;
-    } else if (op == "quit") break;
+    } else if (op == "quit") {
+      mr.update_list();
+      mr.update_aux();
+      break;
+    }
     cin >> s;
     if (op == "insert") {
       cin >> val;
@@ -26,6 +30,11 @@ int main() {
       mr.remove_pair(s, val);
     } else if (op == "find") {
       mr.get_key(s);
+    }else if (op=="get") {
+      cin>>val;
+      Node node;
+      mr.read(node,val);
+      node.print();
     }
     //mr.print();
   }
