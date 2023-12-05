@@ -20,21 +20,24 @@ int main() {
       mr.update_list();
       mr.update_aux();
       break;
-    }
-    cin >> s;
-    if (op == "insert") {
-      cin >> val;
-      mr.insert_pair(s, val);
-    } else if (op == "delete") {
-      cin >> val;
-      mr.remove_pair(s, val);
-    } else if (op == "find") {
-      mr.get_key(s);
-    }else if (op=="get") {
-      cin>>val;
-      Node node;
-      mr.read(node,val);
-      node.print();
+    } else {
+      cin >> s;
+      if (op == "insert") {
+        cin >> val;
+        mr.insert_pair(s, val);
+      } else if (op == "delete") {
+        cin >> val;
+        mr.remove_pair(s, val);
+      } else if (op == "find") {
+        mr.get_key(s);
+      } else if (op == "get") {
+        cin >> val;
+        Node node;
+        mr.read(node, val);
+        node.print();
+      } else {
+        continue;
+      }
     }
     //mr.print();
   }

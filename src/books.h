@@ -14,8 +14,8 @@ using std::ofstream;
 using std::pair;
 using std::map;
 
-const int sqn = 1000;
-const int info_num=250;
+const int sqn = 22;
+const int info_num=25;
 
 class Node;
 
@@ -387,7 +387,7 @@ public:
 
 
   void get_key(char _key[]) {
-    KV lowest(_key,0),highest(_key,INT_MAX);
+    KV lowest(_key,INT_MIN),highest(_key,INT_MAX);
     auto beg=list.lower_bound(lowest);
     beg--;
     auto end=list.upper_bound(highest);
