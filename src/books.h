@@ -14,7 +14,7 @@ using std::ofstream;
 using std::pair;
 using std::map;
 
-const int sqn = 22;
+const int sqn = 24;
 const int info_num=25;
 
 class Node;
@@ -113,6 +113,7 @@ public:
     for(;i<size-1;i++) {
       data[i]=data[i+1];
     }
+    data[size-1]=KV();
     size--;
     if (size > 0) first = data[0];
     else first = KV();
@@ -197,10 +198,6 @@ public:
   void init_list() {
     file_main.open(main_name, fstream::out | fstream::binary);
     int cnt=0;
-    for(auto i :list) {
-      file_main.write(reinterpret_cast<char *>(&i), sizeof(pair<KV,int>));
-      cnt++;
-    }
     pair<KV,int> tmp(KV(),0);
     while(cnt<info_num) {
       file_main.write(reinterpret_cast<char *>(&tmp), sizeof(pair<KV,int>));
@@ -318,13 +315,14 @@ public:
       }
       else {
         Node next_node;
-        read(next_node,(*last).second);
+        int pos=(*last).second;
+        read(next_node,pos);
         list.erase(next_node.first);
         next_node.insert(in_pair);
-        update(next_node,(*last).second);
+        update(next_node,pos);
         list.insert(pair<KV,int>(next_node.first,next_node.pos));
         if (next_node.size >= sqn - 20) {
-          divide_node((*last).second);
+          divide_node(pos);
         }
       }
     } else {
@@ -366,17 +364,16 @@ public:
   }
 
   void remove_pair(char _key[], int _val) {
-    Node first_node;
     KV in_pair(_key, _val);
     auto del=list.upper_bound(in_pair);
-    auto it=del;
     del--;
     Node node;
-    if((*del).second!=1&&(*del).second!=2){
-      read(node, (*del).second);
+    int pos=(*del).second;
+    if(pos!=1&&pos!=2){
+      read(node, pos);
       list.erase(node.first);
       node.remove(in_pair);
-      update(node, (*del).second);
+      update(node, pos);
       if(node.size!=0) list.insert(pair<KV,int>(node.first,node.pos));
       else {
         lengthoflist--;
