@@ -5,7 +5,7 @@ using std::cin;
 
 int main() {
   NodeMemory nm;
-  nm.initialise("ma");
+  nm.initialise("data");
   char s[70];
   int n;
   cin >> n;
@@ -28,11 +28,6 @@ int main() {
         nm.remove_pair(s, val);
       } else if (op == "find") {
         nm.get_key(s);
-      } else if (op == "get") {
-        cin >> val;
-        Node node;
-        nm.read(node, val);
-        node.print();
       } else {
         continue;
       }
